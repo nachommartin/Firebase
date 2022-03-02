@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page';
-import { DataService, Note } from '../services/data.service';
+import { DataService, Pokemon } from '../services/data.service';
 
 @Component({
   selector: 'app-home',
@@ -10,39 +10,44 @@ import { DataService, Note } from '../services/data.service';
 })
 export class HomePage {
 
-  notes: Note[] = [];
+  pokes: Pokemon[] = [];
 
   constructor(private dataService: DataService,  private cd: ChangeDetectorRef, 
     private alertCtrl: AlertController, private modalCtrl: ModalController) {
-      this.dataService.getNotes().subscribe(res => {
-        this.notes = res;
+      this.dataService.getPokemon().subscribe(res => {
+        this.pokes = res;
         this.cd.detectChanges();
       });
     }
     
-    async addNote() {
+    async addPoke() {
       const alert = await this.alertCtrl.create({
-        header: 'Add Note',
+        header: 'Incluir Pokemon',
         inputs: [
           {
-            name: 'title',
-            placeholder: 'My cool note',
+            name: 'nombre',
+            placeholder: 'Nombre',
             type: 'text'
           },
           {
-            name: 'text',
-            placeholder: 'Learn Ionic',
-            type: 'textarea'
+            name: 'tipo',
+            placeholder: 'Tipo',
+            type: 'text'
+          },
+          {
+            name: 'generacion',
+            placeholder: 'Generacion',
+            type: 'text'
           }
         ],
         buttons: [
           {
-            text: 'Cancel',
+            text: 'Cancelar',
             role: 'cancel'
           }, {
-            text: 'Add',
+            text: 'Incluir',
             handler: res => {
-              this.dataService.addNote({ text: res.text, title: res.title });
+              this.dataService.addPokemon({ Nombre: res.Nombre, Tipo: res.tipo, Generacion: res.Generacion });
             }
           }
         ]
@@ -51,10 +56,10 @@ export class HomePage {
       await alert.present();
     }
    
-    async openNote(note: Note) {
+    async openPoke(poke: Pokemon) {
       const modal = await this.modalCtrl.create({
         component: ModalPage,
-        componentProps: { id: note.id },
+        componentProps: { nombre: poke.Nombre },
         breakpoints: [0, 0.5, 0.8],
         initialBreakpoint: 0.8
       });

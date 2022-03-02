@@ -1,21 +1,21 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Blank
+      Listado de Pokémon
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
 <ion-list>
-  <ion-item *ngFor="let note of notes" (click)="openNote(note)">
+  <ion-item *ngFor="let poke of pokes" (click)="openPoke(poke)">
     <ion-label>
-      {{ note.title }}
+      {{ poke.Nombre }}
     </ion-label>
   </ion-item>
 </ion-list>
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button (click)="addNote()">
+  <ion-fab-button (click)="addPoke()">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
-import { DataService, Note } from '../services/data.service';
+import { DataService, Pokemon } from '../services/data.service';
 
 @Component({
   selector: 'app-modal',
@@ -9,26 +9,26 @@ import { DataService, Note } from '../services/data.service';
 })
 export class ModalPage implements OnInit {
 
-  @Input() id: string;
-  note: Note = null;
+  @Input() nombre: string;
+  poke: Pokemon = null;
 
   constructor(private dataService: DataService, private modalCtrl: ModalController, private toastCtrl: ToastController) { }
 
   ngOnInit() {
-    this.dataService.getNoteById(this.id).subscribe(res => {
-      this.note = res;
+    this.dataService.getPokemonByNombre(this.nombre).subscribe(res => {
+      this.poke = res;
     });
   }
 
-  async deleteNote() {
-    await this.dataService.deleteNote(this.note)
+  async deletePoke() {
+    await this.dataService.deletePokemon(this.poke)
     this.modalCtrl.dismiss();
   }
  
-  async updateNote() {
-    await this.dataService.updateNote(this.note);
+  async updatePoke() {
+    await this.dataService.updatePokemon(this.poke);
     const toast = await this.toastCtrl.create({
-      message: 'Note updated!.',
+      message: 'Pokemon actualizado!.',
       duration: 2000
     });
     toast.present();

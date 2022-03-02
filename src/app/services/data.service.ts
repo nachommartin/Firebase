@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Firestore, collectionData,collection,doc,docData, addDoc, deleteDoc, updateDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
-export interface Note {
-  id?: string;
-  title: string;
-  text: string;
+export interface Pokemon {
+  Nombre: string;
+  Tipo: string;
+  Generacion: string;
 }
 
 @Injectable({
@@ -15,28 +15,28 @@ export class DataService {
 
   constructor(private firestore: Firestore) { }
 
-  getNotes(): Observable<Note[]> {
-    const notesRef = collection(this.firestore, 'notes');
-    return collectionData(notesRef, { idField: 'id'}) as Observable<Note[]>;
+  getPokemon(): Observable<Pokemon[]> {
+    const notesRef = collection(this.firestore, 'Pokemon');
+    return collectionData(notesRef, { idField: 'id'}) as Observable<Pokemon[]>;
   }
  
-  getNoteById(id): Observable<Note> {
-    const noteDocRef = doc(this.firestore, `notes/${id}`);
-    return docData(noteDocRef, { idField: 'id' }) as Observable<Note>;
+  getPokemonByNombre(nombre:string): Observable<Pokemon> {
+    const noteDocRef = doc(this.firestore, `Pokemon/${nombre}`);
+    return docData(noteDocRef, { idField: 'nombre' }) as Observable<Pokemon>;
   }
  
-  addNote(note: Note) {
-    const notesRef = collection(this.firestore, 'notes');
-    return addDoc(notesRef, note);
+  addPokemon(poke: Pokemon) {
+    const notesRef = collection(this.firestore, 'Pokemon');
+    return addDoc(notesRef, poke);
   }
  
-  deleteNote(note: Note) {
-    const noteDocRef = doc(this.firestore, `notes/${note.id}`);
+  deletePokemon(poke: Pokemon) {
+    const noteDocRef = doc(this.firestore, `Pokemon/${poke.Nombre}`);
     return deleteDoc(noteDocRef);
   }
  
-  updateNote(note: Note) {
-    const noteDocRef = doc(this.firestore, `notes/${note.id}`);
-    return updateDoc(noteDocRef, { title: note.title, text: note.text });
+  updatePokemon(poke: Pokemon) {
+    const noteDocRef = doc(this.firestore, `Pokemon/${poke.Nombre}`);
+    return updateDoc(noteDocRef, { tipò: poke.Tipo, generacion: poke.Generacion });
   }
 }
