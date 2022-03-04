@@ -3,9 +3,10 @@ import { Firestore, collectionData,collection,doc,docData, addDoc, deleteDoc, up
 import { Observable } from 'rxjs';
 
 export interface Pokemon {
-  Nombre: string;
-  Tipo: string;
-  Generacion: string;
+  id?: string;
+  nombre: string;
+  tipo: string;
+  generacion: string;
 }
 
 @Injectable({
@@ -16,27 +17,27 @@ export class DataService {
   constructor(private firestore: Firestore) { }
 
   getPokemon(): Observable<Pokemon[]> {
-    const notesRef = collection(this.firestore, 'Pokemon');
+    const notesRef = collection(this.firestore, 'pokemon');
     return collectionData(notesRef, { idField: 'id'}) as Observable<Pokemon[]>;
   }
  
-  getPokemonByNombre(nombre:string): Observable<Pokemon> {
-    const noteDocRef = doc(this.firestore, `Pokemon/${nombre}`);
-    return docData(noteDocRef, { idField: 'nombre' }) as Observable<Pokemon>;
+  getPokemonById(id:string): Observable<Pokemon> {
+    const noteDocRef = doc(this.firestore, `pokemon/${id}`);
+    return docData(noteDocRef, { idField: 'id' }) as Observable<Pokemon>;
   }
  
   addPokemon(poke: Pokemon) {
-    const notesRef = collection(this.firestore, 'Pokemon');
+    const notesRef = collection(this.firestore, 'pokemon');
     return addDoc(notesRef, poke);
   }
  
   deletePokemon(poke: Pokemon) {
-    const noteDocRef = doc(this.firestore, `Pokemon/${poke.Nombre}`);
+    const noteDocRef = doc(this.firestore, `pokemon/${poke.id}`);
     return deleteDoc(noteDocRef);
   }
  
   updatePokemon(poke: Pokemon) {
-    const noteDocRef = doc(this.firestore, `Pokemon/${poke.Nombre}`);
-    return updateDoc(noteDocRef, { tipò: poke.Tipo, generacion: poke.Generacion });
+    const noteDocRef = doc(this.firestore, `pokemon/${poke.id}`);
+    return updateDoc(noteDocRef, { tipo: poke.tipo, generacion: poke.generacion });
   }
 }

@@ -47,7 +47,7 @@ export class HomePage {
           }, {
             text: 'Incluir',
             handler: res => {
-              this.dataService.addPokemon({ Nombre: res.Nombre, Tipo: res.tipo, Generacion: res.Generacion });
+              this.dataService.addPokemon({ nombre: res.nombre, tipo: res.tipo, generacion: res.generacion });
             }
           }
         ]
@@ -59,7 +59,7 @@ export class HomePage {
     async openPoke(poke: Pokemon) {
       const modal = await this.modalCtrl.create({
         component: ModalPage,
-        componentProps: { nombre: poke.Nombre },
+        componentProps: { id:poke.id},
         breakpoints: [0, 0.5, 0.8],
         initialBreakpoint: 0.8
       });

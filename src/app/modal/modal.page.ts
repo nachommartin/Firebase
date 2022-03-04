@@ -9,13 +9,13 @@ import { DataService, Pokemon } from '../services/data.service';
 })
 export class ModalPage implements OnInit {
 
-  @Input() nombre: string;
+  @Input() id: string;
   poke: Pokemon = null;
 
   constructor(private dataService: DataService, private modalCtrl: ModalController, private toastCtrl: ToastController) { }
 
   ngOnInit() {
-    this.dataService.getPokemonByNombre(this.nombre).subscribe(res => {
+    this.dataService.getPokemonById(this.id).subscribe(res => {
       this.poke = res;
     });
   }
