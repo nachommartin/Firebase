@@ -6,7 +6,11 @@
 
 <ion-content>
   <ion-content>
-    <div *ngIf="poke">
+    <div *ngIf="'poke' && 'dex'">
+      <ion-item>
+        <ion-img [src]="dex.sprites.front_default"></ion-img>
+      </ion-item>
+
       <ion-item>
         <ion-label position="stacked">Tipo</ion-label>
         <ion-input [(ngModel)]="poke.tipo"></ion-input>

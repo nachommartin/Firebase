@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collectionData,collection,doc,docData, addDoc, deleteDoc, updateDoc } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import {HttpClient} from "@angular/common/http";import { Observable } from 'rxjs';
+import { PokeDex } from '../interfaces/pokedex';
 
 export interface Pokemon {
   id?: string;
@@ -13,8 +14,9 @@ export interface Pokemon {
   providedIn: 'root'
 })
 export class DataService {
+  url : string= "";
 
-  constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore, private http:HttpClient) { }
 
   getPokemon(): Observable<Pokemon[]> {
     const notesRef = collection(this.firestore, 'pokemon');
@@ -39,5 +41,11 @@ export class DataService {
   updatePokemon(poke: Pokemon) {
     const noteDocRef = doc(this.firestore, `pokemon/${poke.id}`);
     return updateDoc(noteDocRef, { tipo: poke.tipo, generacion: poke.generacion });
+  }
+
+  getImagePokemon(nombre:string){
+    this.url="https://pokeapi.co/api/v2/pokemon/"+nombre.toLowerCase()+"";
+    return this.http.get<PokeDex>(this.url)
+
   }
 }
