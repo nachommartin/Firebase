@@ -11,6 +11,8 @@ import { DataService, Pokemon } from '../services/data.service';
 export class HomePage {
 
   pokes: Pokemon[] = [];
+  latitude: any = 0; 
+  longitude: any = 0;
 
   constructor(private dataService: DataService,  private cd: ChangeDetectorRef, 
     private alertCtrl: AlertController, private modalCtrl: ModalController) {
@@ -19,6 +21,7 @@ export class HomePage {
         this.cd.detectChanges();
       });
     }
+    
     
     async addPoke() {
       const alert = await this.alertCtrl.create({
@@ -67,4 +70,7 @@ export class HomePage {
       await modal.present();
     }
 
-}
+    
+  }
+
+

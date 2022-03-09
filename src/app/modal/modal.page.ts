@@ -2,6 +2,7 @@ import { Component, OnInit, Input} from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { PokeDex } from '../interfaces/pokedex';
 import { DataService, Pokemon } from '../services/data.service';
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
 @Component({
   selector: 'app-modal',
@@ -14,7 +15,13 @@ export class ModalPage implements OnInit {
   poke: Pokemon = null;
   dex!: PokeDex;
 
-  constructor(private dataService: DataService, private modalCtrl: ModalController, private toastCtrl: ToastController) { }
+  latitude: any = 0; 
+  longitude: any = 0;
+
+
+
+  constructor(private dataService: DataService, private modalCtrl: ModalController, private toastCtrl: ToastController,
+    private geo:Geolocation) { }
 
   ngOnInit() {
     this.dataService.getPokemonById(this.id).subscribe(res => {
@@ -43,4 +50,23 @@ export class ModalPage implements OnInit {
  
   }
 
-}
+  async updateCoord() {
+    await this.dataService.updateCoord(this.poke, this.latitude, this.longitude);
+    const toast = await this.toastCtrl.create({
+      message: 'Coordenadas guardadas!.',
+      duration: 2000
+    });
+    toast.present();
+ 
+  }
+
+  getCurrentCoordinates() {
+    this.geo.getCurrentPosition().then((resp) => {
+      this.latitude = resp.coords.latitude;
+      this.longitude = resp.coords.longitude;
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
+  }
+
+  }

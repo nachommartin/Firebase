@@ -5,22 +5,47 @@
 </ion-header>
 
 <ion-content>
-  <ion-content>
     <div *ngIf="'poke' && 'dex'">
       <ion-item>
         <ion-img [src]="dex.sprites.front_default"></ion-img>
       </ion-item>
 
+      <ion-item *ngIf="poke.captura">
+        <ion-label position="stacked">Coordenadas</ion-label>
+        <ion-text {{poke.captura[0]}}></ion-text>
+      </ion-item>
+   
+
       <ion-item>
         <ion-label position="stacked">Tipo</ion-label>
         <ion-input [(ngModel)]="poke.tipo"></ion-input>
       </ion-item>
-   
+
       <ion-item>
         <ion-label position="stacked">Generacion</ion-label>
-        <ion-textarea [(ngModel)]="poke.generacion" rows="8"></ion-textarea>
+        <ion-input [(ngModel)]="poke.generacion"></ion-input>
       </ion-item>
+      <ion-button (click)="getCurrentCoordinates()" expand="block">
+        ¿Dónde lo capturaste?
+      </ion-button>
+      <ion-item>
+        <ion-label>
+          Latitud
+        </ion-label>
+        <ion-badge color="info" slot="end">{{latitude}}</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          Longitud
+        </ion-label>
+        <ion-badge color="info" slot="end">{{longitude}}</ion-badge>
+      </ion-item>
+
     </div>
+    <ion-button expand="block" color="success" (click)="updateCoord()">
+      <ion-icon name="save" slot="start"></ion-icon>
+      Guardar coordenadas
+    </ion-button>
    
     <ion-button expand="block" color="success" (click)="updatePoke()">
       <ion-icon name="save" slot="start"></ion-icon>
