@@ -9,7 +9,8 @@ export interface Pokemon {
   nombre: string;
   tipo: string;
   generacion: string;
-  captura?:any[];
+  latitud?:any;
+  longitud?:any;
 }
 
 @Injectable({
@@ -57,7 +58,7 @@ export class DataService {
 
   updateCoord(poke: Pokemon, latitude:any, longitude:any) {
     const noteDocRef = doc(this.firestore, `pokemon/${poke.id}`);
-    return updateDoc(noteDocRef, { captura: latitude, longitude });
+    return updateDoc(noteDocRef, { latitud: latitude, longitud: longitude });
   }
 
   getImagePokemon(nombre:string){

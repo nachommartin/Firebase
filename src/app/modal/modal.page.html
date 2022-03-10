@@ -10,9 +10,12 @@
         <ion-img [src]="dex.sprites.front_default"></ion-img>
       </ion-item>
 
-      <ion-item *ngIf="poke.captura">
-        <ion-label position="stacked">Coordenadas</ion-label>
-        <ion-text {{poke.captura[0]}}></ion-text>
+      <ion-item *ngIf="poke.longitud">
+        <ion-label position="stacked">El Pokemon fue capturado en</ion-label>
+        <ion-button (click)="verMapa()" expand="block">Ver mapa</ion-button>
+        <ion-item>
+        <div id="mapa2" class="map-container"> </div>
+      </ion-item>
       </ion-item>
    
 
@@ -29,17 +32,9 @@
         ¿Dónde lo capturaste?
       </ion-button>
       <ion-item>
-        <ion-label>
-          Latitud
-        </ion-label>
-        <ion-badge color="info" slot="end">{{latitude}}</ion-badge>
+        <div id="map" class="map-container"> </div>
       </ion-item>
-      <ion-item>
-        <ion-label>
-          Longitud
-        </ion-label>
-        <ion-badge color="info" slot="end">{{longitude}}</ion-badge>
-      </ion-item>
+   
 
     </div>
     <ion-button expand="block" color="success" (click)="updateCoord()">

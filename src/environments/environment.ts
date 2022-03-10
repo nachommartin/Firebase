@@ -18,7 +18,10 @@ export const environment = {
   
     appId: "1:493038082225:web:1bcb0ba5e6f98bac116a90"
   
-  }
+  }, 
+  mapBoxToken: 'pk.eyJ1IjoibmFjaDg1IiwiYSI6ImNsMGt0Y2pjbzA0N3MzanFscmh6bXduNWgifQ.n0O0DjC1dp7lp_Ppbb6cZA'
+  
+
 }
 
 /*
