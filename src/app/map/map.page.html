@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Map</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item *ngIf="poke.longitud">
+    <ion-label position="stacked">El Pokemon fue capturado en</ion-label>
+    <ion-button (click)="verMapa()" expand="block">Ver mapa</ion-button>
+  </ion-item>
+  <div id="mapa2" class="map-container"> </div>
+  <ion-item *ngIf="!poke.longitud">
+    <ion-label position="stacked">No se ha registrado el lugar de la captura</ion-label>
+  </ion-item>
+
+</ion-content>

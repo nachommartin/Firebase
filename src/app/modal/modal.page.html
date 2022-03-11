@@ -8,20 +8,13 @@
     <div *ngIf="'poke' && 'dex'">
       <ion-item>
         <ion-img [src]="dex.sprites.front_default"></ion-img>
-      </ion-item>
-
-      <ion-item *ngIf="poke.longitud">
-        <ion-label position="stacked">El Pokemon fue capturado en</ion-label>
-        <ion-button (click)="verMapa()" expand="block">Ver mapa</ion-button>
-        <ion-item>
-        <div id="mapa2" class="map-container"> </div>
-      </ion-item>
-      </ion-item>
-   
-
+      </ion-item>  
       <ion-item>
         <ion-label position="stacked">Tipo</ion-label>
         <ion-input [(ngModel)]="poke.tipo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-button (click)="openMap(poke)">Ver lugar de captura</ion-button>
       </ion-item>
 
       <ion-item>
@@ -31,24 +24,30 @@
       <ion-button (click)="getCurrentCoordinates()" expand="block">
         ¿Dónde lo capturaste?
       </ion-button>
-      <ion-item>
+      <ion-label>
         <div id="map" class="map-container"> </div>
-      </ion-item>
-   
-
+      </ion-label>
     </div>
+    <br><br><br><br><br><br><br>
+    <ion-row>
+    <ion-col class="ion-padding-bottom">
     <ion-button expand="block" color="success" (click)="updateCoord()">
       <ion-icon name="save" slot="start"></ion-icon>
       Guardar coordenadas
     </ion-button>
-   
+    </ion-col>
+    <ion-col class="ion-padding-bottom">
     <ion-button expand="block" color="success" (click)="updatePoke()">
       <ion-icon name="save" slot="start"></ion-icon>
       Actualizar
     </ion-button>
+  </ion-col>
+  <ion-col class="ion-padding-bottom">
     <ion-button expand="block" color="danger" (click)="deletePoke()">
       <ion-icon name="trash" slot="start"></ion-icon>
       Borrar
     </ion-button>
+    </ion-col>
+    </ion-row>
 
 </ion-content>

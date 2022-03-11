@@ -5,6 +5,7 @@ import { DataService, Pokemon } from '../services/data.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
+import { MapPage } from '../map/map.page';
 
 @Component({
   selector: 'app-modal',
@@ -92,14 +93,17 @@ export class ModalPage implements OnInit {
     }
 
 
-  verMapa() {
-    this.mapa2 = new mapboxgl.Map({
-      container: 'map',
-      style: this.style,
-      zoom: this.zoom,
-      center: [this.poke.longitud, this.poke.latitud]
-    });
-    this.mapa2.addControl(new mapboxgl.NavigationControl());
+
+
+    async openMap(poke: Pokemon) {
+      const modal = await this.modalCtrl.create({
+        component: MapPage,
+        componentProps: { id:poke.id},
+        breakpoints: [0, 0.5, 0.8],
+        initialBreakpoint: 0.8
+      });
+   
+      await modal.present();
     }
 
    
