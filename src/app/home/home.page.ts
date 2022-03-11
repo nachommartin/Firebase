@@ -63,8 +63,8 @@ export class HomePage {
       const modal = await this.modalCtrl.create({
         component: ModalPage,
         componentProps: { id:poke.id},
-        breakpoints: [0, 1, 1.3],
-        initialBreakpoint: 1.3
+        breakpoints: [0, 0.7, 0.9],
+        initialBreakpoint: 0.9
       });
    
       await modal.present();
